@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
@@ -584,13 +585,9 @@ class Upgrader {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(messages.message(UpgraderMessage.releaseNotes)!,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(
-                releaseNotes,
-                maxLines: 15,
-                overflow: TextOverflow.ellipsis,
-              ),
+              const Text('Nouveautés :',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(releaseNotes),
             ],
           ));
     }
@@ -601,10 +598,21 @@ class Upgrader {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(message),
+          SubstringHighlight(
+            text: message,
+            terms: [_appStoreVersion.toString(), _installedVersion.toString()],
+            textStyle:
+                Theme.of(context).textTheme.subtitle1 ?? const TextStyle(),
+            textStyleHighlight: Theme.of(context)
+                    .textTheme
+                    .subtitle1
+                    ?.copyWith(fontWeight: FontWeight.bold) ??
+                const TextStyle(),
+          ),
           Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text(messages.message(UpgraderMessage.prompt)!)),
+              child: Text(messages!.message(UpgraderMessage.prompt)!,
+                  style: const TextStyle(fontStyle: FontStyle.italic))),
           if (notes != null) notes,
         ],
       )),

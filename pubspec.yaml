@@ -38,6 +38,9 @@ dependencies:
   # Pure Dart library for HTML5 parsing
   html: ^0.15.0
 
+  # Easier formatting for parts of text
+  substring_highlight: ^1.0.33
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
