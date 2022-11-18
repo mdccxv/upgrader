@@ -611,7 +611,7 @@ class Upgrader {
           ),
           Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Text(messages!.message(UpgraderMessage.prompt)!,
+              child: Text(messages.message(UpgraderMessage.prompt)!,
                   style: const TextStyle(fontStyle: FontStyle.italic))),
           if (notes != null) notes,
         ],
